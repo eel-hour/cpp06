@@ -29,10 +29,37 @@ void print_int(std::string con)
 }
 
 void print_float(std::string con)
-{
+{%
+    bool trigger = false;
+    double tmp = (double)(std::stod(con));
+    double tmp_2 = 1;
+    while (tmp >= tmp_2)
+        tmp = tmp - tmp_2;
+    if (!tmp)
+        trigger = true;
     std::cout << "float : ";
-    
-    std::cout << (std::stof(con)) << 'f' << std::endl;
+    std::cout << (double)(std::stod(con));
+    if (trigger)
+        std::cout << ".0" << 'f' << std::endl;
+    else
+        std::cout << 'f' << std::endl;
+}
+
+void print_double(std::string con)
+{
+    bool trigger = false;
+    double tmp = (double)(std::stod(con));
+    double tmp_2 = 1;
+    while (tmp >= tmp_2)
+        tmp = tmp - tmp_2;
+    if (!tmp)
+        trigger = true;
+    std::cout << "double : ";
+    std::cout << (double)(std::stod(con));
+    if (trigger)
+        std::cout << ".0" << std::endl;
+    else
+        std::cout << std::endl;
 }
 
 void from_int(std::string con)
@@ -40,7 +67,24 @@ void from_int(std::string con)
     print_char(con);
     print_int(con);
     print_float(con);
-    // print_double(con);
+    print_double(con);
+}
+
+void from_char(std::string con)
+{
+    con = std::to_string((int)con[0]);
+    print_char(con);
+    print_int(con);
+    print_float(con);
+    print_double(con);
+}
+
+void from_float(std::string con)
+{
+    print_char(con);
+    print_int(con);
+    print_float(con);
+    print_double(con);
 }
 
 bool is_float(std::string con)
@@ -60,6 +104,10 @@ bool is_float(std::string con)
     return true;
 }
 
+void _inff(){
+    std::cout << "int: impossible\nchar: impossible\nfloat: -inff\ndouble: -inf" << std::endl;
+}
+
 int main(int ac, char **av)
 {
     if (ac != 2){
@@ -67,17 +115,22 @@ int main(int ac, char **av)
         return (1);
     }
     std::string con(av[1]);
-    // bool inti = false;
-    bool chara = false;
-    // bool floa = false;
-    // bool doubl = false;
-    if (is_all_digits(con))
+    if (con == "-inff")
+        _inff();
+    // else if (con = "+inff")
+    //     inff();
+    else if (con == "-inf")
+        _inff();
+    // else if (con = "+inf")
+    //     inf();
+    // else if (con = "nanf")
+    //     nanf();
+    // else if (con = "nan")
+        // nan();
+    else if (is_all_digits(con))
         from_int(con);
-    // else if (con.length() == 1)
-    //     from_char;
-    //     // chara = true;
-    // else if (is_float(con))
-    //     print_float(con);
-    // // if (inti)
-    // //     from_int(con);
+    else if (con.length() == 1)
+        from_char(con);
+    else if (is_float(con))
+        from_int(con);
 }
