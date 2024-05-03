@@ -29,7 +29,7 @@ void print_int(std::string con)
 }
 
 void print_float(std::string con)
-{%
+{
     bool trigger = false;
     double tmp = (double)(std::stod(con));
     double tmp_2 = 1;
@@ -108,29 +108,39 @@ void _inff(){
     std::cout << "int: impossible\nchar: impossible\nfloat: -inff\ndouble: -inf" << std::endl;
 }
 
-int main(int ac, char **av)
+void inff(){
+    std::cout << "int: impossible\nchar: impossible\nfloat: +inff\ndouble: +inf" << std::endl;
+}
+
+void nanf(){
+    std::cout << "int: impossible\nchar: impossible\nfloat: nanf\ndouble: nan" << std::endl;
+}
+
+static void convert(std::string con)
 {
-    if (ac != 2){
-        std::cout << "Enter corrrect arguments" << std::endl;
-        return (1);
-    }
-    std::string con(av[1]);
-    if (con == "-inff")
+    if (!con[0])
+        ;
+    else if (con == "-inff")
         _inff();
-    // else if (con = "+inff")
-    //     inff();
+    else if (con == "+inff")
+        inff();
     else if (con == "-inf")
         _inff();
-    // else if (con = "+inf")
-    //     inf();
-    // else if (con = "nanf")
-    //     nanf();
-    // else if (con = "nan")
-        // nan();
+    else if (con == "+inf")
+        inff();
+    else if (con == "nanf")
+        nanf();
+    else if (con == "nan")
+        nanf();
     else if (is_all_digits(con))
         from_int(con);
     else if (con.length() == 1)
         from_char(con);
     else if (is_float(con))
         from_int(con);
+}
+
+int main(int ac, char **av)
+{
+    convert("-10");
 }
