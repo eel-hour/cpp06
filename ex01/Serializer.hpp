@@ -2,14 +2,16 @@
 #define SERIALIZER
 
 #include "Data.hpp"
+#include <iostream>
+
 
 class Serializer{
     public:
         Serializer();
-        Serializer(SERIALIZER &seri);
+        // Serializer(SERIALIZER &seri);
         Serializer &operator=(Serializer &seri);
         ~Serializer();
-        Data* deserialize(uintptr_t raw);
+        Data* deserialize(intptr_t raw);
         uintptr_t serialize(Data* ptr);
-}
+};
 #endif
