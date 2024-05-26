@@ -6,12 +6,12 @@
 
 
 class Serializer{
-    public:
         Serializer();
-        // Serializer(SERIALIZER &seri);
+        Serializer(SERIALIZER &seri);
         Serializer &operator=(Serializer &seri);
         ~Serializer();
-        Data* deserialize(uintptr_t raw);
-        uintptr_t serialize(Data* ptr);
+    public:
+        static Data* deserialize(uintptr_t raw);
+        static uintptr_t serialize(Data* ptr);
 };
 #endif

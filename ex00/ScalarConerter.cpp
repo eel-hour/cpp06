@@ -16,7 +16,7 @@ void print_char(std::string con)
 {
     std::cout << "char: ";
     if (std::stoi(con) > 32 && std::stoi(con) < 127)
-       std::cout << "'" << (char)(std::stoi(con)) << "'" << std::endl;
+       std::cout << "'" << static_cast<char>(std::stoi(con)) << "'" << std::endl;
     else 
         std::cout << "Non displayable" << std::endl;
 }
@@ -25,20 +25,20 @@ void print_int(std::string con)
 {
     std::cout << "int: ";
     
-    std::cout << (int)(std::stod(con)) << std::endl;
+    std::cout << static_cast<int>(std::stod(con)) << std::endl;
 }
 
 void print_float(std::string con)
 {
     bool trigger = false;
-    double tmp = (double)(std::stod(con));
+    double tmp = static_cast<float>(std::stof(con));
     double tmp_2 = 1;
     while (tmp >= tmp_2)
         tmp = tmp - tmp_2;
     if (!tmp)
         trigger = true;
     std::cout << "float : ";
-    std::cout << (double)(std::stod(con));
+    std::cout << static_cast<float>(std::stof(con));
     if (trigger)
         std::cout << ".0" << 'f' << std::endl;
     else
@@ -48,14 +48,14 @@ void print_float(std::string con)
 void print_double(std::string con)
 {
     bool trigger = false;
-    double tmp = (double)(std::stod(con));
+    double tmp = static_cast<double>(std::stod(con));
     double tmp_2 = 1;
     while (tmp >= tmp_2)
         tmp = tmp - tmp_2;
     if (!tmp)
         trigger = true;
     std::cout << "double : ";
-    std::cout << (double)(std::stod(con));
+    std::cout << static_cast<double>(std::stod(con));
     if (trigger)
         std::cout << ".0" << std::endl;
     else
@@ -72,7 +72,7 @@ void from_int(std::string con)
 
 void from_char(std::string con)
 {
-    con = std::to_string((int)con[0]);
+    con = std::to_string(static_cast<int>(con[0]));
     print_char(con);
     print_int(con);
     print_float(con);
@@ -91,7 +91,7 @@ bool is_float(std::string str)
 {
     std::string con(str);
     bool trigger = false;
-    for (int i = 0; con[i]; i++){
+    for (unsigned int i = 0; con[i]; i++){
         if (i == con.length() - 1 && con[i] == 'f')
         ;
         else if (con[i] == '.' && !trigger){
@@ -117,11 +117,11 @@ void nanf(){
     std::cout << "int: impossible\nchar: impossible\nfloat: nanf\ndouble: nan" << std::endl;
 }
 
-static void convert(std::string con)
+void ScalarConverter::convert(std::string con)
 {
     if (!con[0])
         ;
-    else if (con == "-inff" || con == "-inf"))
+    else if (con == "-inff" || con == "-inf")
         _inff();
     else if (con == "+inff" || con == "+inf")
         inff();

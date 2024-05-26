@@ -4,18 +4,14 @@
 #include <iostream>
 
 class  ScalarConverter{
-    std::string con;
-    std::string type;
+    // std::string con;
+    // std::string type;
+    ScalarConverter();
+    ScalarConverter(ScalarConverter &scalarConverter);
+    ScalarConverter &operator=(ScalarConverter &scalarConverter);
+    ~ScalarConverter();
     public:
-    ScalarConverter(std::string &con){
-        this->con = con;
-    };
-    ScalarConverter(ScalarConverter &scalarConverter){
-        this->con = scalarConverter.con;
-    };
-    ~ScalarConverter(){
-        
-    };
-}
+    static void convert(std::string con);
+};
 
 #endif

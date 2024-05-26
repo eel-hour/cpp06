@@ -1,4 +1,4 @@
-
+#include "ScalarConverter.hpp"
 int main(int ac, char **av)
 {
     if (ac != 2){
@@ -6,5 +6,5 @@ int main(int ac, char **av)
         return (1);
     }
     std::string con(av[1]);
-    convert(con);
+    ScalarConverter::convert(con);
 }
